@@ -24,7 +24,7 @@ const getTableContent = async (table) => {
 
 const getTableColumnsNames = async (table) => {
     try {
-        const response = await fetch(`http://localhost:${PORT}/${table}/colname`);
+        const response = await fetch(`http://localhost:${PORT}/${table}/columnsname`);
         const jsonData = await response.json();
         
         return jsonData;

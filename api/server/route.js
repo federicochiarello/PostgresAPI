@@ -14,7 +14,7 @@ router.get("/tables/list", async(req, res) => {
 });
 
 // get table columns names
-router.get("/:table/colname", async(req, res) => {
+router.get("/:table/columnsname", async(req, res) => {
     try {
         const { table } = req.params;
         const data = await client.query(`SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${table}';`);
@@ -37,7 +37,8 @@ router.get("/:table", async(req, res) => {
     }
 });
 
-router.get("/t/getdata", async (req, res) => {
+// get selected columns
+router.get("/:table/selectedcolumns", async (req, res) => {
     try{
         const {selectedField} = req.body;
         console.log(selectedField);
