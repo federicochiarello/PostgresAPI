@@ -23,12 +23,12 @@ app.post('/api/posts', verifyToken, (req, res) => {
     });
 });
 
-app.post('/api/login', (req, res) => {
+app.get('/api/login', (req, res) => {
     // Mock user
     const user = {
         id: 1,
-        username: 'brad',
-        email: 'brad@gmail.com'
+        username: 'toni',
+        email: 'toni@gmail.com'
     }
 
     jwt.sign({user: user}, 'secretkey', (err, token) => {
@@ -38,31 +38,26 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// FORMAT OF TOKEN
+// TOKEN:
 // Authorization: Bearer <access_token>
 
-// Vereify Token
+// Verify Token
 function verifyToken(req, res, next) {
     // Get auth header value
     const bearerHeader = req.headers['authorization'];
     // Check if bearer is undefined
     if(typeof bearerHeader !== 'undefined') {
-        // Split at the space
+        
         const bearer = bearerHeader.split(' ');
-        // Get token from array
         const bearerToken = bearer[1];
-        // Set the token
+        
         req.token = bearerToken;
-        // Next middleware
         next();
 
     } else {
         //Forbidden
         res.sendStatus(403);
-        console.log('azz');
     }
 }
 
 app.listen(5000, () => console.log ('Server started on port 5000'));
-
-// React, TOKEN saved in localstorage
